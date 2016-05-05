@@ -1,0 +1,9 @@
+== README
+
+Usually the README has the information needed to start the application.
+
+Instead, I will write the things needed to BUILD this up, as part of my WebDev study.
+
+1. After creating the app (rails new APP), we need to initialize our git repository, so, "cd" into the rails app directory and "git init" this bastard.
+
+
