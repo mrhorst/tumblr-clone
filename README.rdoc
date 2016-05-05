@@ -4,6 +4,6 @@ Usually the README has the information needed to start the application.
 
 Instead, I will write the things needed to BUILD this up, as part of my WebDev study.
 
-1. After creating the app (rails new APP), we need to initialize our git repository, so, "cd" into the rails app directory and "git init" this bastard.
+1. After creating the app (rails new APP), we need to initialize our git repository, so, "cd" into the rails app directory and "git init" this bastard, followed by "git status" to check the changes, "git add ." to add all the files that have been changed to the "to be commited" list, and 'git commit -m "initial commit" ' so we commit this as the first part of our project.
 
 
