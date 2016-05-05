@@ -6,4 +6,178 @@ Instead, I will write the things needed to BUILD this up, as part of my WebDev s
 
 1. After creating the app (rails new APP), we need to initialize our git repository, so, "cd" into the rails app directory and "git init" this bastard, followed by "git status" to check the changes, "git add ." to add all the files that have been changed to the "to be commited" list, and 'git commit -m "initial commit" ' so we commit this as the first part of our project.
 
+2. Now, we have to create a controller for "posts", since this is a tumblr-like app.
+run "rails g controller posts" (g stands for generate)
+REMEMBER: Controllers are plural, Models are singular.
+
+3. Open the rails app in a editor of your preference (I'm using Atom). Open the file "posts_controller.rb", inside "app/controllers/".
+
+4. Inside the PostsController class, "def index end".
+
+5. Now go to the "routes.rb" file, inside "config" folder, and go for:
+
+resources :posts
+root "posts#index" (meaning posts controller index action)
+
+ps.: root "posts#index" says that the root of our application is the index action of the posts controller..
+
+
+6. Let's create a view file for index now.
+Inside "views/posts" folder, create a new file called "index.html.erb"
+
+Inside this file, put something simples like <h1>This is the index page</h1>. Make sure you saved all these files, and go to your browser and refresh the localhost:3000 page. Guess whats on your screen.
+
+7. Let's create a method for new on our posts_controller.rb file.
+Open the posts_controller.rb file and write just below def index end "def new end"
+
+8. Create a view file for "new", into "views/posts", same as before: new.html.erb
+
+Inside this file, do this:
+
+<h1>Make Something</h1>
+
+<%= form_for :post, url: posts_path do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
+
+-----------------
+
+To understand form_for :post, url: posts_path ...... enter this link:
+http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-form_for
+
+url: posts_path basically is the URL this form is to be submitted to.
+
+the :post means we are using the post object now to create this form.
+
+This form will create a place where you can fill a Title, and also a Body.
+That's why we have f.label :title (this will show a label as "Title"
+f.text_field :title means we are creating a text field where whatever you put in there will belong to title.
+
+Same thing for :body.
+
+f.submit is the submit button.
+
+Some things to consider here:
+
+<%=  %> means whatever is inside these tags will be shown in the page. (thats because of the equals sign '=')
+
+<% %> means whatever is inside these tags will run ruby code, but not be shown in the page. (no equals sign).
+
+9. If we try to post something right now it will throw us an error. Actually, just try to post something, and read the fucking error. You'll know what's missing. If you do not get it, keep going and you'll see.
+
+10. Let's now generate a model for posts, 'cause we haven't done that yet.
+
+run: rails g model Post title:string body:text
+
+After this, we have to push this new information to our database (the new model).
+
+run: rake db:migrate
+
+11. Remember item 9, where you couldn't create your post?
+It's time to fix that.
+
+Go back to the posts_controller.rb, and create a create method.
+
+This time it will be a little bit different:
+
+def create
+  @post = Post.new(post_params)
+  @post.save
+
+  redirect_to @post
+end
+
+private
+
+  def post_params
+    params.require(:post).permit(:title, :body)
+  end
+
+----
+
+inside the create method we have @post = Post.new(post_params).
+This means that we should push the information given in the fields in our "new post" page to the variable @post.
+
+After that, we have the @post.save, to save it to our database.
+
+redirect_to @post will redirect us to the post we just created
+
+Below the create method we have the private section, and def post_params.
+
+This will tell our application what the hell ae the post_params, and will permit only :title and :body to be pushed to our @post variable up there in the create method.
+
+
+After you've done this, you can now post something to our tumblr app, BUT WAIT!
+You will now get and "Unknown action" page, because the show method is not yet defined. We will see that in the next item.
+
+12. back to the posts_controller.rb, define a new method for show.
+We will still get an error because the "template is missing".
+
+This means we have to create a new view file inside our views/posts folder, called show.html.erb
+
+Go to your now created show.html.erb file and paste this:
+
+<h1 class="title">
+  <%= @post.title %>
+</h1>
+
+<p class="date">
+  Submitted <%= time_ago_in_words(@post.created_at) %> ago
+</p>
+
+<p class="body">
+  <%= @post.body %>
+</p>
+
+---
+
+The first block has the Title of the post. It is inside <h1> tags because it is supposed to be big (this is basic HTML), and it has the class "title" because we need it later for styling with CSS (this is basic CSS).
+
+The second block has the time information of when it was posted.
+What the @post.created_at does is access the "created_at" information that the @post variable contains, and displays it with the "time_ago_in_words" method.
+
+Last block contains the body information.
+
+13. If we run now our application, we will still get an error because we are not yet defining what post our "show" method should show us.
+
+For this, go back to the show method inside the posts_controller.rb and write:
+
+@post = Post.find(params[:id])
+
+This will tell our show method to show the post it finds with that one :id params.
+
+14. Let's now check what we changed so far in our application and run "git status" in our terminal.
+
+Check if these are the files you actually wanted to change.
+
+If they are all there, go for "git add ."
+Else, you can add them manually, "git add posts_controller.rb show.html.erb........" of course this will not work because you also have to give it the folder etc, but it is possible to add files manually.
+
+After git add . go for 'git commit -m "Add New, Show and Create methods, fix routes and some other basic things" '
+
+Remember to give a lot of information to git commit, but not too many words. Also, it is a convention to always write verbs like:
+"Add things", instead of "Added things".
+"Fix that", instead of "Fixed that".
+
+Go to http://chris.beams.io/posts/git-commit/ for more information.
+
+Now that we have commited our changes, we can go further.
+
+15. 
+16.
+17.
+18.
 
