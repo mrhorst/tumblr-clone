@@ -6,18 +6,13 @@ Instead, I will write the things needed to BUILD this up, as part of my WebDev s
 
 1. After creating the app (rails new APP), we need to initialize our git repository, so, "cd" into the rails app directory and "git init" this bastard, followed by "git status" to check the changes, "git add ." to add all the files that have been changed to the "to be commited" list, and 'git commit -m "initial commit" ' so we commit this as the first part of our project.
 
-2. Now, we have to create a controller for "posts", since this is a tumblr-like app.
-run "rails g controller posts" (g stands for generate)
-REMEMBER: Controllers are plural, Models are singular.
+2. Now, we have to create a controller for "posts", since this is a tumblr-like app.<br>run "rails g controller posts" (g stands for generate)<br>REMEMBER: Controllers are plural, Models are singular.
 
 3. Open the rails app in a editor of your preference (I'm using Atom). Open the file "posts_controller.rb", inside "app/controllers/".
 
 4. Inside the PostsController class, "def index end".
 
-5. Now go to the "routes.rb" file, inside "config" folder, and go for:
-
-resources :posts
-root "posts#index" (meaning posts controller index action)
+5. Now go to the "routes.rb" file, inside "config" folder, and go for:<br>resources :posts<br>root "posts#index" (meaning posts controller index action)
 
 ps.: root "posts#index" says that the root of our application is the index action of the posts controller..
 
