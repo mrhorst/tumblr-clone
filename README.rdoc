@@ -121,12 +121,12 @@ This time it will be a little bit different:
     end
 
 
-inside the create method we have *@post = Post.new(post_params)*.
+inside the create method we have <b>@post = Post.new(post_params)</b>.
 This means that we should push the information given in the fields in our "new post" page to the variable @post.
 
-After that, we have the *@post.save*, to save it to our database.
+After that, we have the <b>@post.save</b>, to save it to our database.
 
-*redirect_to @post* will redirect us to the post we just created
+<b>redirect_to @post</b> will redirect us to the post we just created
 
 Below the create method we have the private section, and def post_params.
 
@@ -159,9 +159,9 @@ Go to your now created show.html.erb file and paste this:
 The first block has the Title of the post. It is inside <h1> tags because it is supposed to be big (this is basic HTML), and it has the class "title" because we need it later for styling with CSS (this is basic CSS).
 
 The second block has the time information of when it was posted.
-What *@post.created_at* does is access the "created_at" information that the @post variable contains, and displays it with the "time_ago_in_words" method.
+What <b>@post.created_at</b> does is access the "created_at" information that the @post variable contains, and displays it with the "time_ago_in_words" method.
 
-+Last block contains the body information.+
+Last block contains the body information.
 
 - If we run now our application, we will still get an error because we are not yet defining what post our "show" method should show us.
 
@@ -218,9 +218,9 @@ See that in the first line of the code we have
   <% @posts.each do |post| %>
 
 , right? This @posts references the @posts we used before, in our posts_controller.rb file.
-So, in the controller we have @posts, and there it gets *Post.all.order('created_at DESC')*
+So, in the controller we have @posts, and there it gets <b>Post.all.order('created_at DESC')</b>
 Basically, @posts is storing now the information about ALL THE POSTS WE HAVE.
 
 In the view, we say "get that variable storing all the posts we have, and for EACH POST, do...."
 
-*If you have any trouble with the "do |post|" part, send me a message and I will explain it better, but JSYK, it's ruby programming language synthax.*
+<b>If you have any trouble with the "do |post|" part, send me a message and I will explain it better, but JSYK, it's ruby programming language synthax.</b>
