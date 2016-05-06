@@ -195,4 +195,3 @@ Because we still need to change the index.html.erb file, inside views/posts.
 
 17.
 18.
-
