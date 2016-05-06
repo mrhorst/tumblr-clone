@@ -176,8 +176,23 @@ Go to http://chris.beams.io/posts/git-commit/ for more information.
 
 Now that we have commited our changes, we can go further.
 
-15. 
-16.
+15. Let's use our root directory, or index page, to display our posts. Go to posts_controller.rb and inside de index method go for:
+@posts = Post.all.order('created_at DESC')
+This will tell our index method that it should diplay ALL the things inside the object POST and they should be ORDERED DESCENDINGLY, taking as param the date of CREATION.
+
+We are now able to see all the posts....NOT!
+
+Because we still need to change the index.html.erb file, inside views/posts.
+
+16. Inside the index.html.erb file:
+
+<% @posts.each do |post| %>       This line says "take each instance inside the @posts variable and do as post..."; note it doesnt have an equals sign to the erb block because we dont want it to puts THAT on our screen.. (if you're curious, and you should, put an equals sign and see what happens on your browser)
+<div class="post_wrapper">
+	<h2 class="title"><%= link_to post.title, post %></h2>
+	<p class="daet"><%= time_ago_in_words(post.created_at) %></p>
+</div>
+<% end %>
+
 17.
 18.
 
