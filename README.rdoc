@@ -13,56 +13,56 @@ REMEMBER: Controllers are plural, Models are singular.
 - Open the rails app in a editor of your preference (I'm using Atom). Open the file "posts_controller.rb", inside "app/controllers/".
 
 - Inside the PostsController class, write the index method:
-```
-def index
-end
-```
+
+  def index
+  end
+
 
 - Now go to the "routes.rb" file, inside "config" folder, and go for:
-```
-resources :posts
-root "posts#index"
-```
+
+  resources :posts
+  root "posts#index"
+
 meaning posts controller index action
 root "posts#index" says that the root of our application is the index action of the posts controller..
 
 - Let's create a view file for index now.
 Inside "views/posts" folder, create a new file called "index.html.erb"
 Inside this file, put something simples like
-```
-<h1>This is the index page</h1>
-```
+
+  <h1>This is the index page</h1>
+
 Make sure you saved all these files, and go to your browser and refresh the localhost:3000 page. Guess whats on your screen.
 
 - Let's create a method for new on our posts_controller.rb file.
 Open the posts_controller.rb file and write just below the index method:
-```
-def new
-end
-```
+
+  def new
+  end
+
 
 - Create a view file for "new", into "views/posts", same as before: new.html.erb
 Inside this file, do this:
-```
-<h1>Make Something</h1>
 
-<%= form_for :post, url: posts_path do |f| %>
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
+  <h1>Make Something</h1>
 
-  <p>
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </p>
+  <%= form_for :post, url: posts_path do |f| %>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
 
-  <p>
-    <%= f.submit %>
-  </p>
+    <p>
+      <%= f.label :body %><br>
+      <%= f.text_area :body %>
+    </p>
 
-<% end %>
-```
+    <p>
+      <%= f.submit %>
+    </p>
+
+  <% end %>
+
 
 To understand form_for :post, url: posts_path ...... enter this link:
 http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-form_for
@@ -90,16 +90,16 @@ Some things to consider here:
 - Let's now generate a model for posts, 'cause we haven't done that yet.
 
 run:
-```
-rails g model Post title:string body:text
-```
+
+  rails g model Post title:string body:text
+
 
 After this, we have to push this new information to our database (the new model).
 
 run:
-```
-rake db:migrate
-```
+
+  rake db:migrate
+
 
 - Remember a few steps back, where you couldn't create your post?
 It's time to fix that.
@@ -107,20 +107,20 @@ It's time to fix that.
 Go back to the posts_controller.rb, and create a 'create' method.
 
 This time it will be a little bit different:
-```
-def create
-  @post = Post.new(post_params)
-  @post.save
 
-  redirect_to @post
-end
+  def create
+    @post = Post.new(post_params)
+    @post.save
 
-private
-
-  def post_params
-    params.require(:post).permit(:title, :body)
+    redirect_to @post
   end
-```
+
+  private
+
+    def post_params
+      params.require(:post).permit(:title, :body)
+    end
+
 
 inside the create method we have **@post = Post.new(post_params)**.
 This means that we should push the information given in the fields in our "new post" page to the variable @post.
@@ -143,19 +143,19 @@ We will still get an error because the "template is missing".
 This means we have to create a new view file inside our views/posts folder, called show.html.erb
 
 Go to your now created show.html.erb file and paste this:
-```
-<h1 class="title">
-  <%= @post.title %>
-</h1>
 
-<p class="date">
-  Submitted <%= time_ago_in_words(@post.created_at) %> ago
-</p>
+  <h1 class="title">
+    <%= @post.title %>
+  </h1>
 
-<p class="body">
-  <%= @post.body %>
-</p>
-```
+  <p class="date">
+    Submitted <%= time_ago_in_words(@post.created_at) %> ago
+  </p>
+
+  <p class="body">
+    <%= @post.body %>
+  </p>
+
 
 The first block has the Title of the post. It is inside <h1> tags because it is supposed to be big (this is basic HTML), and it has the class "title" because we need it later for styling with CSS (this is basic CSS).
 
@@ -167,9 +167,9 @@ Last block contains the body information.
 - If we run now our application, we will still get an error because we are not yet defining what post our "show" method should show us.
 
 For this, go back to the show method inside the posts_controller.rb and write:
-```
-@post = Post.find(params[:id])
-```
+
+  @post = Post.find(params[:id])
+
 
 This will tell our show method to show the post it finds with that one :id params.
 
@@ -193,9 +193,9 @@ Go to http://chris.beams.io/posts/git-commit/ for more information.
 Now that we have commited our changes, we can go further.
 
 - Let's use our root directory, or index page, to display our posts. Go to posts_controller.rb and inside de index method go for:
-```
-@posts = Post.all.order('created_at DESC')
-```
+
+  @posts = Post.all.order('created_at DESC')
+
 
 This will tell our index method that it should diplay ALL the things inside the object POST and they should be ORDERED DESCENDINGLY, taking as params the date of CREATION.
 
@@ -204,20 +204,20 @@ We are now able to see all the posts....NOT!
 Because we still need to change the index.html.erb file, inside views/posts.
 
 - Inside the index.html.erb file:
-```
-<% @posts.each do |post| %>       This line says "take each instance inside the @posts variable and do as post..."; note it doesnt have an equals sign to the erb block because we dont want it to puts THAT on our screen.. (if you're curious, and you should, put an equals sign and see what happens on your browser)
-  <div class="post_wrapper">
-    <h2 class="title"><%= link_to post.title, post %></h2>
-    <p class="date"><%= time_ago_in_words(post.created_at) %></p>
-  </div>
-<% end %>
-```
+
+  <% @posts.each do |post| %>       This line says "take each instance inside the @posts variable and do as post..."; note it doesnt have an equals sign to the erb block because we dont want it to puts THAT on our screen.. (if you're curious, and you should, put an equals sign and see what happens on your browser)
+    <div class="post_wrapper">
+      <h2 class="title"><%= link_to post.title, post %></h2>
+      <p class="date"><%= time_ago_in_words(post.created_at) %></p>
+    </div>
+  <% end %>
+
 
 Ok but, why does this work?
 See that in the first line of the code we have
-```
-<% @posts.each do |post| %>
-```
+
+  <% @posts.each do |post| %>
+
 , right? This @posts references the @posts we used before, in our posts_controller.rb file.
 So, in the controller we have @posts, and there it gets **Post.all.order('created_at DESC')**
 Basically, @posts is storing now the information about ALL THE POSTS WE HAVE.
