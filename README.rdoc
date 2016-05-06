@@ -4,51 +4,48 @@ Usually the README has the information needed to start the application.
 
 Instead, I will write the things needed to BUILD this up, as part of my WebDev study.
 
-1. After creating the app (rails new APP), we need to initialize our git repository, so, "cd" into the rails app directory and "git init" this bastard, followed by "git status" to check the changes, "git add ." to add all the files that have been changed to the "to be commited" list, and 'git commit -m "initial commit" ' so we commit this as the first part of our project.
+- After creating the app (rails new APP), we need to initialize our git repository, so, "cd" into the rails app directory and "git init" this bastard, followed by "git status" to check the changes, "git add ." to add all the files that have been changed to the "to be commited" list, and 'git commit -m "initial commit" ' so we commit this as the first part of our project.
 
-2. Now, we have to create a controller for "posts", since this is a tumblr-like app.<br>run "rails g controller posts" (g stands for generate)<br>REMEMBER: Controllers are plural, Models are singular.
+- Now, we have to create a controller for "posts", since this is a tumblr-like app.
+Run "rails g controller posts" (g stands for generate)
+REMEMBER: Controllers are plural, Models are singular.
 
-3. Open the rails app in a editor of your preference (I'm using Atom). Open the file "posts_controller.rb", inside "app/controllers/".
+- Open the rails app in a editor of your preference (I'm using Atom). Open the file "posts_controller.rb", inside "app/controllers/".
 
-4. Inside the PostsController class, "def index end".
+- Inside the PostsController class, "def index end".
 
-5. Now go to the "routes.rb" file, inside "config" folder, and go for:<br>resources :posts<br>root "posts#index" (meaning posts controller index action)
-
+- Now go to the "routes.rb" file, inside "config" folder, and go for:<br>resources :posts<br>root "posts#index" (meaning posts controller index action)
 ps.: root "posts#index" says that the root of our application is the index action of the posts controller..
 
-
-6. Let's create a view file for index now.
+- Let's create a view file for index now.
 Inside "views/posts" folder, create a new file called "index.html.erb"
-
 Inside this file, put something simples like <h1>This is the index page</h1>. Make sure you saved all these files, and go to your browser and refresh the localhost:3000 page. Guess whats on your screen.
 
-7. Let's create a method for new on our posts_controller.rb file.
+- Let's create a method for new on our posts_controller.rb file.
 Open the posts_controller.rb file and write just below def index end "def new end"
 
-8. Create a view file for "new", into "views/posts", same as before: new.html.erb
-
+- Create a view file for "new", into "views/posts", same as before: new.html.erb
 Inside this file, do this:
 
-<h1>Make Something</h1>
+  <h1>Make Something</h1>
 
-<%= form_for :post, url: posts_path do |f| %>
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
+  <%= form_for :post, url: posts_path do |f| %>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
 
-  <p>
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </p>
+    <p>
+      <%= f.label :body %><br>
+      <%= f.text_area :body %>
+    </p>
 
-  <p>
-    <%= f.submit %>
-  </p>
+    <p>
+      <%= f.submit %>
+    </p>
 
-<% end %>
+  <% end %>
 
------------------
 
 To understand form_for :post, url: posts_path ...... enter this link:
 http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-form_for
@@ -71,9 +68,9 @@ Some things to consider here:
 
 <% %> means whatever is inside these tags will run ruby code, but not be shown in the page. (no equals sign).
 
-9. If we try to post something right now it will throw us an error. Actually, just try to post something, and read the fucking error. You'll know what's missing. If you do not get it, keep going and you'll see.
+- If we try to post something right now it will throw us an error. Actually, just try to post something, and read the fucking error. You'll know what's missing. If you do not get it, keep going and you'll see.
 
-10. Let's now generate a model for posts, 'cause we haven't done that yet.
+- Let's now generate a model for posts, 'cause we haven't done that yet.
 
 run: rails g model Post title:string body:text
 
@@ -81,7 +78,7 @@ After this, we have to push this new information to our database (the new model)
 
 run: rake db:migrate
 
-11. Remember item 9, where you couldn't create your post?
+- Remember item 9, where you couldn't create your post?
 It's time to fix that.
 
 Go back to the posts_controller.rb, and create a create method.
@@ -118,7 +115,7 @@ This will tell our application what the hell ae the post_params, and will permit
 After you've done this, you can now post something to our tumblr app, BUT WAIT!
 You will now get and "Unknown action" page, because the show method is not yet defined. We will see that in the next item.
 
-12. back to the posts_controller.rb, define a new method for show.
+- back to the posts_controller.rb, define a new method for show.
 We will still get an error because the "template is missing".
 
 This means we have to create a new view file inside our views/posts folder, called show.html.erb
@@ -146,7 +143,7 @@ What the @post.created_at does is access the "created_at" information that the @
 
 Last block contains the body information.
 
-13. If we run now our application, we will still get an error because we are not yet defining what post our "show" method should show us.
+- If we run now our application, we will still get an error because we are not yet defining what post our "show" method should show us.
 
 For this, go back to the show method inside the posts_controller.rb and write:
 
@@ -154,7 +151,7 @@ For this, go back to the show method inside the posts_controller.rb and write:
 
 This will tell our show method to show the post it finds with that one :id params.
 
-14. Let's now check what we changed so far in our application and run "git status" in our terminal.
+- Let's now check what we changed so far in our application and run "git status" in our terminal.
 
 Check if these are the files you actually wanted to change.
 
@@ -171,7 +168,7 @@ Go to http://chris.beams.io/posts/git-commit/ for more information.
 
 Now that we have commited our changes, we can go further.
 
-15. Let's use our root directory, or index page, to display our posts. Go to posts_controller.rb and inside de index method go for:
+- Let's use our root directory, or index page, to display our posts. Go to posts_controller.rb and inside de index method go for:
 @posts = Post.all.order('created_at DESC')
 This will tell our index method that it should diplay ALL the things inside the object POST and they should be ORDERED DESCENDINGLY, taking as param the date of CREATION.
 
@@ -179,7 +176,7 @@ We are now able to see all the posts....NOT!
 
 Because we still need to change the index.html.erb file, inside views/posts.
 
-16. Inside the index.html.erb file:
+- Inside the index.html.erb file:
 
 <% @posts.each do |post| %>       This line says "take each instance inside the @posts variable and do as post..."; note it doesnt have an equals sign to the erb block because we dont want it to puts THAT on our screen.. (if you're curious, and you should, put an equals sign and see what happens on your browser)
 <div class="post_wrapper">
@@ -188,5 +185,5 @@ Because we still need to change the index.html.erb file, inside views/posts.
 </div>
 <% end %>
 
-17.
-18.
+-
+-
