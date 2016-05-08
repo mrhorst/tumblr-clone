@@ -316,3 +316,17 @@ Actually, we styled it in our application.css.scss!!!
 You can go to that file if you want and modify it. But basically, when we add a div around our code with some id, it will fetch the styling found in the css.scss file.
 
 We are done with the styling now for these parts, so let's merge the changes made in this "styling" branch with our "master" branch:
+
+run:
+
+  git status
+  git add .
+  git commit -m "Styling and structure"
+  git checkout master
+  git merge styling
+
+git status for checking the changes;
+git add . for adding all these changes to the "to be committed";
+git commit for committing;
+git checkout master to change to master branch;
+git merge styling to merge to the master branch the styling branch.
