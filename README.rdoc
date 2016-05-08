@@ -249,7 +249,7 @@ To add different fonts to our application, we have to import them from somewhere
 Google has something called Google Fonts. So let's use it.
 
 1. Go to the folder views/layouts, and open application.html.erb;
-2. on top of <%= javascript...., add the line <%= stylesheet_link_tag 'application', '\http:\//fonts.googleapis.com/css?family=Raleway:400,700' %>
+2. on top of <%= javascript...., add the line <%= stylesheet_link_tag 'application', {'http://fonts.googleapis.com/css?family=Raleway:400,700'}['http://fonts.googleapis.com/css?family=Raleway:400,700'] %>
 3. under <%= javascript...., add the line <%= favicon_link_tag 'favicon.ico' %>
 
 favicon is that tiny image the pretty much every webpage has in web browsers tabs, right next to the name of the website.
