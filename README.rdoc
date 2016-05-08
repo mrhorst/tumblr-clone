@@ -289,3 +289,30 @@ This is what the body tags should have:
     </div>
 
   </body>
+
+There isn't much I can help here.
+Most of it is HTML and CSS.
+The ruby on rails part we covered before, so you should understand what's going on.
+
+Still, here is a link for helping you with some HTML/CSS:
+https://css-tricks.com/the-difference-between-id-and-class/
+
+ID's and Classes are some of the things that "bugged" me some time ago, so I think it's good for you to read about'em now.
+
+Check the application now: Go to your browser and localhost:3000
+
+Index page looks good, but we still need to work on our show posts page and some others.
+
+For that, go to the file located in views/posts/show.html.erb
+
+All we have to do here is add a "div" around all our code, with the id="post_content"
+Remember to close the div at the bottom of the page.
+And please, indent your code. It is a must-know for every programmer.
+
+Now let's do the same for new.html.erb, but instead of id="post_content", go for id="page_wrapper"
+
+Why all these things are being styled just by adding a div id="something" around it?
+Actually, we styled it in our application.css.scss!!!
+You can go to that file if you want and modify it. But basically, when we add a div around our code with some id, it will fetch the styling found in the css.scss file.
+
+We are done with the styling now for these parts, so let's merge the changes made in this "styling" branch with our "master" branch:
